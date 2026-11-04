@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>COLOR GOGIRI · 고기리 가을 도감</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F4EEE3; --paper:#FFFBF4; --ink:#2A2118; --muted:#7A6B5A; --line:#E4D8C6; --soft:#F8F1E6;
+  --A:#2F8A57; --B:#B48A00; --C:#CF3F35; --D:#DD6E12; --accent:#8C3B1E;
+  --display:"Jua","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#17130F; --paper:#221C16; --ink:#F2E9DC; --muted:#B3A28C; --line:#3A3027; --soft:#2A231C;
+    --A:#6CC48F; --B:#E9C54A; --C:#F2776D; --D:#F4A05A; --accent:#F0A57D;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#17130F; --paper:#221C16; --ink:#F2E9DC; --muted:#B3A28C; --line:#3A3027; --soft:#2A231C;
+  --A:#6CC48F; --B:#E9C54A; --C:#F2776D; --D:#F4A05A; --accent:#F0A57D;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.25}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+img{max-width:100%}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.topin{max-width:760px;margin:0 auto;padding:12px 16px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:24px}
+.brand small{color:var(--muted);font-size:13px;display:block;font-family:var(--body)}
+.dots{display:flex;gap:4px;margin-left:auto}
+.dots i{width:12px;height:12px;border-radius:50% 0 50% 0;display:block}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;justify-content:center;background:var(--paper);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -2px 12px rgba(0,0,0,.06)}
+nav.tabs .in{display:flex;gap:4px;width:100%;max-width:520px}
+nav.tabs a{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 4px;min-height:52px;justify-content:center;text-decoration:none;color:var(--muted);font-weight:600;font-size:13px;border-radius:12px}
+nav.tabs a .ic{font-size:21px;line-height:1.1}
+nav.tabs a[aria-current="page"]{color:var(--accent);background:var(--soft)}
+
+main{max-width:760px;margin:0 auto;padding:18px 14px calc(96px + env(safe-area-inset-bottom,0px))}
+section.view{display:none}
+section.view.on{display:block}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card + .card{margin-top:14px}
+.hint{color:var(--muted);font-size:14px}
+.btn{min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:12px 18px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.field{display:block;width:100%;min-height:46px;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg)}
+
+/* 테스트 */
+.hero{text-align:center;padding:28px 20px}
+.hero h2{font-size:32px;margin-top:8px}
+.hero .leaves{font-size:34px;letter-spacing:6px}
+.namebox{display:flex;gap:8px;margin-top:18px}
+.namebox .field{flex:1}
+.prog{height:6px;border-radius:99px;background:var(--soft);overflow:hidden;margin-bottom:16px}
+.prog b{display:block;height:100%;background:var(--accent);transition:width .3s}
+.q{font-family:var(--display);font-size:23px;margin-bottom:14px}
+.opts{display:grid;gap:8px}
+.opts button{text-align:left;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;font-size:15.5px}
+.opts button:hover{border-color:var(--accent)}
+
+/* 결과 */
+.result{border:0;color:#fff;background:var(--tc);text-align:center;padding:28px 20px}
+.result .lbl{opacity:.85;font-size:14px}
+.result h2{font-size:36px;margin:6px 0 4px}
+.result p.desc{max-width:30em;margin:10px auto 0;font-size:15px}
+.mates{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
+.mates span{background:rgba(255,255,255,.2);padding:4px 11px;border-radius:99px;font-size:14px}
+.mates span.me{background:#fff;color:var(--tc);font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;justify-content:center}
+
+/* 코스 */
+.teampick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{min-height:38px;padding:7px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--cc)}
+.chip[aria-pressed="true"]{border-color:var(--cc);background:var(--cc);color:#fff}
+.chip[aria-pressed="true"] i{background:#fff}
+.course h3{font-size:26px;color:var(--tc)}
+.stops{list-style:none;margin:14px 0 0;padding:0;position:relative}
+.stops::before{content:"";position:absolute;left:3.95em;top:10px;bottom:10px;width:2px;background:var(--line)}
+.stops li{display:grid;grid-template-columns:3.4em 1fr;gap:22px;padding:8px 0;position:relative}
+.stops li::after{content:"";position:absolute;left:calc(3.95em - 5px);top:16px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:3px solid var(--tc)}
+.stops time{font-family:var(--display);color:var(--tc);text-align:right;font-size:17px}
+.stops b{display:block}
+.stops span{color:var(--muted);font-size:14px}
+.stops a{color:inherit}
+.car{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--soft);border:1px solid var(--line);margin-left:4px;vertical-align:2px}
+.missions{display:grid;gap:10px;margin-top:6px}
+.missions div{padding:14px;border-radius:14px;background:var(--soft)}
+.colors{display:grid;gap:8px;margin-top:10px}
+.colors div{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--cc)}
+.colors .sw{width:40px;height:40px;border-radius:50% 0 50% 0;background:var(--cc)}
+.colors b{font-family:var(--display);font-weight:400;font-size:18px;color:var(--cc)}
+.colors p{font-size:14px;color:var(--muted)}
+.colors .mine{box-shadow:0 0 0 2px var(--cc)}
+.lockmsg{text-align:center;padding:22px 16px}
+/* 낙엽 보드 */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.stats div{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center}
+.stats b{display:block;font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1;color:var(--accent)}
+.stats span{font-size:12.5px;color:var(--muted)}
+.piles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pile{background:linear-gradient(to bottom,var(--paper),var(--soft));border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.pile .hd{padding:10px 8px 6px;text-align:center;border-bottom:4px solid var(--cc)}
+.pile .hd b{display:block;font-family:var(--display);font-weight:400;font-size:34px;line-height:1;color:var(--cc)}
+.pile .hd span{font-family:var(--display);font-size:15px;color:var(--cc)}
+.pile .heap{position:relative;height:300px;overflow:hidden}
+.pile .heap::after{content:"";position:absolute;left:8%;right:8%;bottom:0;height:10px;border-radius:50%;background:var(--cc);opacity:.18}
+.leaf{position:absolute;width:var(--sz);height:var(--sz);color:var(--cc);transform:rotate(var(--r));filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.leaf svg{width:100%;height:100%;display:block}
+.leaf.fall{animation:fall 1.6s cubic-bezier(.3,.6,.4,1) both}
+@keyframes fall{0%{transform:translate(-14px,var(--drop)) rotate(calc(var(--r) - 160deg));opacity:0}12%{opacity:1}55%{transform:translate(14px,calc(var(--drop) * .35)) rotate(calc(var(--r) + 50deg))}100%{transform:translate(0,0) rotate(var(--r))}}
+.leaf.hot::before{content:"❤";position:absolute;right:-4px;top:-6px;font-size:11px;color:#E0457B}
+.pile .ft{padding:8px 8px 10px;font-size:12.5px;text-align:center;border-top:1px solid var(--line)}
+.pile .ft em{font-style:normal;color:var(--muted)}
+.feed{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.feed li{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center;padding:8px;border-radius:14px;background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--cc)}
+.feed img{width:48px;height:48px;object-fit:cover;border-radius:10px;background:var(--soft)}
+.feed p{font-size:14px;line-height:1.4}
+.feed small{color:var(--muted)}
+.tops{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tops button{position:relative;padding:0;border:3px solid var(--cc);border-radius:14px;overflow:hidden;background:var(--soft);cursor:zoom-in;aspect-ratio:3/4}
+.tops img{width:100%;height:100%;object-fit:cover;display:block}
+.tops .rk{position:absolute;left:6px;top:6px;background:var(--cc);color:#fff;font-weight:600;font-size:12px;padding:2px 8px;border-radius:99px}
+.tops .lv{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:2px 8px;border-radius:99px}
+.sec{font-family:var(--display);font-size:20px;margin:20px 0 8px}
+@media (max-width:520px){.pile .heap{height:230px}.pile .hd b{font-size:28px}.pile .hd span{font-size:13px}.piles{gap:6px}.stats b{font-size:26px}}
+@media (min-width:900px){main.wide{max-width:1100px}.pile .heap{height:380px}}
+@media (prefers-reduced-motion: reduce){.leaf.fall{animation:none}}
+.missions b{font-family:var(--display);font-weight:400;font-size:18px}
+.missions p{font-size:14.5px;margin-top:2px}
+
+/* 아카이브 */
+.scoreboard{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.scoreboard>div{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--cc);border-radius:14px;padding:10px 10px 8px}
+.scoreboard .tt{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+.scoreboard .tt span{font-family:var(--display);font-size:15px;color:var(--cc)}
+.scoreboard .tt b{font-family:var(--display);font-size:24px;font-weight:400;color:var(--cc)}
+.scoreboard .sub{font-size:12px;color:var(--muted)}
+.scoreboard ol{list-style:none;margin:6px 0 0;padding:0;font-size:13px}
+.scoreboard li{display:flex;justify-content:space-between;gap:6px;padding:2px 0;border-top:1px dashed var(--line)}
+.scoreboard li:first-child{border-top:0}
+.scoreboard li em{font-style:normal;color:var(--muted);white-space:nowrap}
+.scoreboard li.top b{color:var(--cc)}
+.filters{display:flex;gap:6px;overflow-x:auto;margin:10px -14px 14px;padding:0 14px 4px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filters .chip{flex:none}
+.upl{display:grid;gap:10px}
+.upl .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.drop{border:2px dashed var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;background:var(--bg)}
+.drop.has{border-color:var(--accent)}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.thumbs img{width:58px;height:58px;object-fit:cover;border-radius:8px}
+.status{font-size:14px;color:var(--muted);min-height:1.4em}
+.status.err{color:var(--C)}
+.grid{columns:3 220px;column-gap:10px}
+.ph{break-inside:avoid;margin:0 0 10px;border:3px solid var(--cc);border-radius:16px;overflow:hidden;background:var(--paper);display:block}
+.ph .pic{display:block;width:100%;padding:0;border:0;background:var(--soft);cursor:zoom-in;position:relative}
+.ph .pic img{display:block;width:100%;height:auto;min-height:80px}
+.ph .tag{position:absolute;left:6px;top:6px;background:var(--cc);color:#fff;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:99px}
+.ph .bar{display:flex;align-items:center;gap:6px;padding:7px 8px 7px 10px;border-top:3px solid var(--cc)}
+.ph .who{flex:1;min-width:0;font-size:12.5px;line-height:1.35}
+.ph .who b{display:block;color:var(--cc);font-size:12px}
+.ph .who span{display:block;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heart{flex:none;display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:4px 10px;border-radius:99px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;font-weight:600;font-size:13.5px}
+.heart .h{font-size:16px;line-height:1;filter:grayscale(1);opacity:.55}
+.heart[aria-pressed="true"]{border-color:#E0457B;color:#E0457B}
+.heart[aria-pressed="true"] .h{filter:none;opacity:1}
+.heart:disabled{cursor:default}
+.ph-miss{display:flex;align-items:center;justify-content:center;min-height:120px;font-size:12px;color:var(--muted);padding:8px;text-align:center}
+.sorts{display:flex;gap:6px;align-items:center;margin:-4px 0 12px;font-size:13px;color:var(--muted)}
+@media (max-width:520px){.grid{columns:2;column-gap:8px}.ph{margin-bottom:8px}}
+.new{animation:pop .6s ease}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:none;opacity:1}}
+@keyframes beat{40%{transform:scale(1.35)}}
+.heart.beat .h{animation:beat .35s ease}
+@media (prefers-reduced-motion: reduce){.new{animation:none}.prog b{transition:none}}
+.empty{text-align:center;padding:30px 10px;color:var(--muted)}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--A);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+dialog{border:0;border-radius:18px;padding:0;max-width:min(92vw,760px);background:var(--paper);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog img{display:block;max-height:70vh;max-width:100%;width:auto;margin:0 auto}
+dialog .cap{padding:12px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+dialog .cap p{flex:1;font-size:14.5px}
+.admin{margin-top:18px;border-style:dashed}
+@media (max-width:520px){.scoreboard{grid-template-columns:repeat(2,1fr)}.upl .two{grid-template-columns:1fr}.hero h2{font-size:27px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lf-A" viewBox="0 0 40 40"><path fill="currentColor" d="M20 2 C29 10 33 20 20 38 C7 20 11 10 20 2Z"/><path d="M20 6 V36" stroke="#fff" stroke-opacity=".55" stroke-width="1.6" fill="none"/></symbol>
+  <symbol id="lf-B" viewBox="0 0 40 40"><path fill="currentColor" d="M20 37 L20 26 C10 26 3 18 3 9 C9 6 15 8 18 13 L20 9 L22 13 C25 8 31 6 37 9 C37 18 30 26 20 26Z"/><path d="M20 26 V38" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="lf-C" viewBox="0 0 40 40"><path fill="currentColor" d="M20 2 L23 11 L31 6 L29 15 L38 15 L31 21 L36 27 L26 26 L24 33 L20 28 L16 33 L14 26 L4 27 L9 21 L2 15 L11 15 L9 6 L17 11Z"/><path d="M20 28 V39" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="lf-D" viewBox="0 0 40 40"><path fill="currentColor" d="M20 3 C31 3 37 13 33 23 C30 31 24 34 20 37 C16 34 10 31 7 23 C3 13 9 3 20 3Z"/><path d="M20 7 V35 M20 16 L28 11 M20 24 L12 18 M20 22 L29 18" stroke="#fff" stroke-opacity=".5" stroke-width="1.4" fill="none"/></symbol>
+</svg>
+<header class="top">
+  <div class="topin">
+    <div class="brand">
+      <div><h1>COLOR GOGIRI</h1><small>11/5 채널컨설팅 가을 플레이샵 · 고기리 가을 도감</small></div>
+      <div class="dots" aria-hidden="true"><i style="background:var(--A)"></i><i style="background:var(--B)"></i><i style="background:var(--C)"></i><i style="background:var(--D)"></i></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="메뉴"><div class="in">
+  <a href="#test" data-v="test"><span class="ic" aria-hidden="true">🍂</span>팀원 찾기</a>
+  <a href="#mission" data-v="mission"><span class="ic" aria-hidden="true">🎯</span>오늘의 미션</a>
+  <a href="#archive" data-v="archive"><span class="ic" aria-hidden="true">📸</span>사진 올리기</a>
+</div></nav>
+<main>
+  <section class="view" id="v-test" aria-live="polite"></section>
+
+  <section class="view" id="v-mission"></section>
+
+  <section class="view" id="v-archive">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+      <h2 style="font-size:26px">📸 사진 올리기</h2>
+      <span class="live" id="liveTag" hidden><i></i>실시간</span>
+    </div>
+
+    <div class="card" id="uploadCard">
+      <div class="upl">
+        <p id="uTeamLbl" class="hint"></p>
+        <label>미션<select class="field" id="uMission"></select></label>
+        <label class="drop" id="drop">
+          <input type="file" id="uFile" accept="image/*" multiple hidden>
+          <span id="dropTxt">눌러서 사진 고르기 (한 번에 10장까지)</span>
+          <div class="thumbs" id="thumbs"></div>
+        </label>
+        <input class="field" id="uCap" maxlength="60" placeholder="한 줄 설명 (예: 은행잎 발견!)">
+        <button class="btn" id="uBtn" disabled>올리기</button>
+        <p class="status" id="uStatus"></p>
+      </div>
+    </div>
+
+    <p class="sec">🍁 낙엽 보드</p>
+    <p class="hint" style="margin:-4px 0 10px">사진 한 장이 올라올 때마다 그 팀 색의 낙엽이 하나씩 떨어져 쌓여요.</p>
+    <div class="stats" id="stats"></div>
+    <div class="piles" id="piles"></div>
+
+    <p class="sec">❤️ 인기 사진 TOP 3</p>
+    <div class="tops" id="tops"></div>
+
+    <p class="sec">🖼️ 모든 사진</p>
+    <div class="filters" id="fTeam" role="group" aria-label="팀 필터"></div>
+    <div class="filters" id="fMission" role="group" aria-label="미션 필터" style="margin-top:-6px"></div>
+    <div class="sorts" id="fSort" role="group" aria-label="정렬"></div>
+    <p class="status" id="gStatus">사진을 불러오는 중…</p>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<dialog id="pinDlg" style="padding:18px;width:min(90vw,340px)">
+  <h3 style="font-size:20px">진행자 모드</h3>
+  <input class="field" id="pinIn" type="password" inputmode="numeric" placeholder="PIN" style="margin-top:10px">
+  <p class="status" id="pinSt"></p>
+  <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="pinOk">확인</button><button class="btn ghost" id="pinX">닫기</button></div>
+</dialog>
+<dialog id="lb">
+  <p class="status err" id="lbStatus" style="padding:8px 16px 0;margin:0"></p>
+  <img id="lbImg" alt="">
+  <div class="cap"><p id="lbCap"></p><button class="heart" id="lbHeart" aria-pressed="false"><span class="h">❤️</span><span class="n">0</span></button><button class="btn ghost" id="lbDel" hidden>삭제</button><button class="btn" id="lbClose">닫기</button></div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+/* ===== Supabase 설정: 프로젝트 Settings → API 에서 복사해 붙여넣기 ===== */
+const SUPABASE_URL="https://axhpepyaigsynrgpfbrg.supabase.co";
+const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF4aHBlcHlhaWdzeW5yZ3BmYnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4MDI2MDQsImV4cCI6MjEwOTM3ODYwNH0.aEyGRdPDnwtZ9jMcAaMUWNEP1V9nTYbEd47CiPbJwOM";
+/* ===================================================================== */
+
+/* ---------- 데이터 ---------- */
+const PEOPLE=[["최현진","A"],["백영무","D"],["안영미","B"],["유경후","D"],["신선화","D"],["강다명","B"],["김만기","C"],["김민석","C"],["장윤우","B"],["최필성","B"],["이선영","C"],["안세준","A"],["임주희","A"],["주리","C"],["노제헌","C"],["한경화","B"],["박원지","D"],["박태은","A"],["이나영","A"],["이혜연","D"]];
+const TEAM={
+ A:{name:"초록 소나무팀",en:"GREEN",emoji:"🌲",desc:"묵묵하지만 든든한 숲 같은 사람. 고기리 서쪽 글램핑 숲에서 초록을 모아요.",
+    find:"솔잎과 숲, 글램핑 텐트, 쌈채소, 말차·피스타치오 아이스크림",
+    lunch:["산골항아리바베큐","항아리 숯불 바베큐·라면, 글램핑 분위기"],alt:["고기리막국수","들기름막국수, 웨이팅 필수"],
+    cafe:["피크닉봉봉","수제 아이스크림·에그타르트","도보 약 3분"],
+    go:"15:00",walk:"🚗 지원 차량으로 3~5분",car:"안세준"},
+ B:{name:"노랑 은행팀",en:"YELLOW",emoji:"🍂",desc:"있는 곳을 환하게 만드는 햇살 같은 사람. 계곡 옆 테라스에서 노랑을 찾아요.",
+    find:"은행잎, 볏짚, 노란 케이크·빵, 노란 간판·표지판",
+    lunch:["고기육백","고기 구이 (메뉴·단체석 확인 필요)"],alt:["모노캠프","캠핑식 장작 바베큐"],
+    cafe:["카페헤일로","커피·베이커리, 계곡 옆 테라스","도보 약 6분"],
+    go:"15:00",walk:"🚗 지원 차량으로 3~5분",car:"장윤우"},
+ C:{name:"빨강 단풍팀",en:"RED",emoji:"🍁",desc:"한 번 불붙으면 끝까지 가는 추진력의 사람. 고기리 입구에서 빨강을 사냥해요.",
+    find:"단풍잎, 김치·깍두기, 스타벅스 빨간 시즌 컵·굿즈",
+    lunch:["장수촌","오리·닭 백숙 (사전 주문)"],alt:["고기동감자옹심이&칼국수","옹심이·칼국수·감자전"],
+    cafe:["스타벅스 용인고기동유원지점","넓은 매장, 평일 낮에도 붐벼요","도보 약 3분"],
+    go:"15:00",walk:"도보 약 2분 (스타벅스 바로 옆)",car:""},
+ D:{name:"주황 홍시팀",en:"ORANGE",emoji:"🧡",desc:"모두를 챙기는 따뜻한 홍시 같은 사람. 계곡 옆 모닥불 곁에서 주황을 모아요.",
+    find:"감·홍시, 낙엽, 모닥불 불빛, 주황 음료",
+    lunch:["주막 보리밥 털레기수제비","나물보리밥·털레기수제비"],alt:["타짜오리하우스","오리불고기 철판구이"],
+    cafe:["코울러","계곡 옆 야외 공간, 마당 모닥불","도보 약 3분"],
+    go:"15:00",walk:"도보 약 6분",car:""}
+};
+const KEYS=["A","B","C","D"];
+const MISSIONS={rainbow:"무지개 컬렉터",family:"가장 화목한 단체사진",free:"자유 사진"};
+const QUIZ=[
+ ["가을 하면 제일 먼저 떠오르는 장면은?",["바람 부는 소나무 숲길","노랗게 깔린 은행잎 길","산을 덮은 새빨간 단풍","처마 끝에 매달린 홍시"]],
+ ["주말 오후, 가장 끌리는 건?","숲속 캠핑 의자에서 멍때리기|햇살 드는 카페 창가 자리|사람 북적이는 가을 축제|따뜻한 집밥과 수다".split("|")],
+ ["팀 회의에서 나는 주로…","조용히 정리하고 챙기는 편|분위기를 밝히는 편|일단 밀어붙이는 편|모두의 의견을 챙기는 편".split("|")],
+ ["가을에 마시고 싶은 한 잔은?","말차 라떼|바닐라 라떼|뱅쇼|단호박 라떼".split("|")],
+ ["단체사진 찍을 때 나는?","배경 각도 잡는 사람|소품 들고 오는 사람|포즈 대장|“다 모였어? 하나 둘 셋!” 담당".split("|")]
+];
+const norm=s=>String(s||"").replace(/\s+/g,"");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store={get(k){try{return JSON.parse(localStorage.getItem("cg-"+k))}catch(e){return null}},set(k,v){try{localStorage.setItem("cg-"+k,JSON.stringify(v))}catch(e){}}};
+let me=store.get("me"); // {name, team}
+
+/* ---------- 탭 ---------- */
+const VIEWS=["test","mission","archive"];
+function route(){
+  const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"test";
+  VIEWS.forEach(x=>{document.getElementById("v-"+x).classList.toggle("on",x===v)});
+  document.querySelectorAll("nav.tabs a").forEach(a=>{if(a.dataset.v===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  if(v==="test")renderTest();
+  if(v==="mission")renderMission();
+  if(v==="archive")syncUploadTeam();
+  document.querySelector("main").classList.toggle("wide",v==="archive");
+  if(v==="archive")renderLeafBoard(true);
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange",route);
+
+/* ---------- 테스트 ---------- */
+let quiz=null;
+function renderTest(){
+  const box=document.getElementById("v-test");
+  if(me&&!quiz){return renderResult(box)}
+  if(!quiz){
+    box.innerHTML=`<div class="card hero">
+      <div class="leaves" aria-hidden="true">🌲🍂🍁🧡</div>
+      <h2>나와 닮은<br>내 팀원 찾기</h2>
+      <p class="hint" style="margin-top:8px">이름을 입력하고 다섯 문제에 답하면 나와 닮은 팀원과 우리 팀의 오늘 코스를 알려드려요.</p>
+      <div class="namebox"><input class="field" id="nm" placeholder="이름 (예: 홍길동)" autocomplete="name" maxlength="20"><button class="btn" id="go">시작</button></div>
+      <p class="status err" id="nmErr"></p></div>`;
+    const go=()=>{const n=norm(document.getElementById("nm").value);if(!n){document.getElementById("nmErr").textContent="이름을 입력해주세요.";return}quiz={name:n,i:0,votes:{A:0,B:0,C:0,D:0}};renderTest()};
+    document.getElementById("go").onclick=go;
+    document.getElementById("nm").onkeydown=e=>{if(e.key==="Enter")go()};
+    return;
+  }
+  if(quiz.i<QUIZ.length){
+    const [q,opts]=QUIZ[quiz.i];
+    box.innerHTML=`<div class="card"><div class="prog"><b style="width:${quiz.i/QUIZ.length*100}%"></b></div>
+      <p class="hint">${quiz.i+1} / ${QUIZ.length}</p><p class="q">${esc(q)}</p>
+      <div class="opts">${opts.map((o,j)=>`<button data-k="${KEYS[j]}">${esc(o)}</button>`).join("")}</div></div>`;
+    box.querySelectorAll(".opts button").forEach(b=>b.onclick=()=>{quiz.votes[b.dataset.k]++;quiz.i++;renderTest()});
+    return;
+  }
+  const hit=PEOPLE.find(p=>p[0]===quiz.name);
+  const byQuiz=KEYS.reduce((a,k)=>quiz.votes[k]>quiz.votes[a]?k:a,"A");
+  me={name:quiz.name,team:hit?hit[1]:byQuiz,listed:!!hit};
+  store.set("me",me);quiz=null;syncUploadTeam();
+  renderResult(box);
+}
+function renderResult(box){
+  const t=TEAM[me.team];
+  const mates=PEOPLE.filter(p=>p[1]===me.team).map(p=>p[0]);
+  box.innerHTML=`<div class="card result" style="--tc:var(--${me.team})">
+    <p class="lbl">${esc(me.name)} 님과 닮은 팀원들은</p>
+    <h2>${t.emoji} ${t.name}</h2>
+    <p class="desc">${esc(t.desc)}</p>
+    <div class="mates">${mates.map(m=>`<span class="${m===me.name?"me":""}">${esc(m)}</span>`).join("")}</div>
+    <div class="row"><a class="btn" style="background:#fff;color:var(--tc);text-decoration:none" href="#mission">오늘의 미션</a><a class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.6);text-decoration:none" href="#archive">사진 올리러 가기</a></div>
+  </div>
+  <div class="card course" style="--tc:var(--${me.team});margin-top:14px">${courseHTML(me.team)}</div>
+  ${me.listed?"":`<p class="hint" style="margin-top:10px">명단에서 이름을 찾지 못해 테스트 결과로 팀을 정했어요. 진행자에게 한 번 확인해주세요.</p>`}
+  <p style="text-align:center;margin-top:12px"><button class="btn ghost" id="redo">다른 이름으로 다시 하기</button></p>`;
+  document.getElementById("redo").onclick=()=>{me=null;store.set("me",null);syncUploadTeam();renderTest()};
+}
+
+/* ---------- 코스 (팀원 찾기 결과에서만) ---------- */
+const naver=n=>"https://map.naver.com/p/search/"+encodeURIComponent(n+" 고기동");
+function courseHTML(k){
+  const t=TEAM[k];
+  return `<h3>🗺️ 우리 팀 코스</h3>
+    ${t.car?`<p class="hint" style="margin-top:4px">🚗 차량 지원 팀 (${esc(t.car)} 님)</p>`:""}
+    <ol class="stops">
+      <li><time>11:30</time><div><b>네이버 1784 HALL #1 집합</b><span>팀 컬러 공개, 미션 안내</span></div></li>
+      <li><time>12:00</time><div><b>팀별 차량 출발</b><span>12:30 식당 앞 하차</span></div></li>
+      <li><time>12:40</time><div><b>점심 · <a href="${naver(t.lunch[0])}" target="_blank" rel="noopener">${esc(t.lunch[0])}</a></b><span>${esc(t.lunch[1])} · 대체안 <a href="${naver(t.alt[0])}" target="_blank" rel="noopener">${esc(t.alt[0])}</a> (${esc(t.alt[1])})</span></div></li>
+      <li><time>13:40</time><div><b>카페 · <a href="${naver(t.cafe[0])}" target="_blank" rel="noopener">${esc(t.cafe[0])}</a></b><span>${esc(t.cafe[1])} · 식당에서 ${esc(t.cafe[2])}. 15:00까지 포토 미션</span></div></li>
+      <li><time>${t.go}</time><div><b>오르빛스페이스로 출발</b><span>${esc(t.walk)}. 15:30 전 도착·업로드 마감</span></div></li>
+      <li><time>15:30</time><div><b>팀 프로그램 시작 · <a href="${naver("오르빛스페이스")}" target="_blank" rel="noopener">오르빛스페이스</a></b><span>사진 함께 보기 → 단체사진 투표 → 단체 프로그램 → 시상</span></div></li>
+      <li><time>17:00</time><div><b>종료</b><span>수고하셨어요!</span></div></li>
+    </ol>
+    <p class="hint" style="margin-top:10px">오후 집결지는 <a href="${naver("오르빛스페이스")}" target="_blank" rel="noopener">오르빛스페이스</a>(이종무로 6, 스타벅스 바로 옆)예요.</p>`;
+}
+const COLORNOTE={A:"광교산 숲의 초록",B:"은행잎의 노랑",C:"단풍의 빨강",D:"홍시와 낙엽의 주황"};
+function renderMission(){
+  const box=document.getElementById("v-mission");
+  box.innerHTML=`<div class="card">
+    <h2 style="font-size:26px">🎯 오늘의 미션</h2>
+    <p class="hint" style="margin-top:4px">15:00 촬영 종료 · 15:30 업로드 마감 · 사진은 “사진 올리기” 탭에 올려요</p>
+    <div class="missions" style="margin-top:12px">
+      <div><b>MISSION 01 · 무지개 컬렉터 (25점)</b><p>우리 팀 컬러가 확실히 보이는 사진을 가장 많이 모은 팀이 우승. 음식·카페 소품·인테리어도 인정, 같은 오브제는 한 번만.</p></div>
+      <div><b>MISSION 02 · 세상에서 가장 화목한 단체사진 (25점)</b><p>팀원 전원이 나온 가장 화목한 사진 한 장. 웃음·포즈·연출 자유, 오르빛스페이스에서 전체 투표로 점수를 정해요.</p></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="font-size:21px">🏆 15:30 팀 프로그램 & 시상</h3>
+    <p class="hint">오르빛스페이스에서 다 같이 사진을 보고, 단체 프로그램으로 추가 점수를 모아요.</p>
+    <div class="missions" style="margin-top:10px">
+      <div><b>🧠 단체 프로그램</b><p>다 함께하는 팀 대항 프로그램이에요. 결과만큼 팀 점수에 더해져요.</p></div>
+      <div><b>🥇 BEST TEAM · 경품 지급</b><p>무지개 컬렉터 + 단체사진 + 특별 미션 + 단체 프로그램 점수를 합친 1위 팀</p></div>
+      <div><b>🎁 개인상</b><p>❤️ 하트를 가장 많이 받은 사람 · 📸 사진에 가장 많이 찍힌 사람 · 🧠 단체 프로그램 MVP</p></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="font-size:21px">팀별 컬러</h3>
+    <p class="hint">무지개 컬렉터는 우리 팀 컬러만 인정돼요.</p>
+    <div class="colors">${KEYS.map(k=>`<div style="--cc:var(--${k})" class="${me&&me.team===k?"mine":""}"><span class="sw" aria-hidden="true"></span><span><b>${TEAM[k].emoji} ${TEAM[k].name} · ${TEAM[k].en}</b><p>${COLORNOTE[k]}${me&&me.team===k?" · 우리 팀":""}</p></span></div>`).join("")}</div>
+  </div>
+  ${me?`<div class="card" style="--tc:var(--${me.team})"><h3 style="font-size:20px;color:var(--tc)">${TEAM[me.team].emoji} 우리 팀이 찾아볼 것</h3><p style="margin-top:6px">${esc(TEAM[me.team].find)}</p><p style="margin-top:12px"><a class="btn" href="#archive" style="text-decoration:none">사진 올리기</a></p></div>`
+      :`<div class="card lockmsg"><p>🔒 우리 팀과 코스는 팀원 찾기를 마친 뒤에 볼 수 있어요.</p><p style="margin-top:10px"><a class="btn" href="#test" style="text-decoration:none">팀원 찾기</a></p></div>`}`;
+}
+
+/* ---------- 아카이브 ---------- */
+let photos=[], seen=new Set(), firstLoad=true, fTeam="all", fMission="all";
+let db=null, assets=null, myId=null, canAdmin=false, picked=[];
+let sb=null, adminPin="";
+const blobURL=path=>SUPABASE_URL+"/storage/v1/object/public/photos/"+String(path).split("/").map(encodeURIComponent).join("/");
+const thumbURL=path=>blobURL(String(path).replace(/\.[a-z0-9]+$/i,"")+"_t.jpg");
+const uuid=()=>(crypto.randomUUID?crypto.randomUUID():"d"+Date.now().toString(36)+Math.random().toString(36).slice(2,12));
+function deviceId(){let d=store.get("device");if(!d||String(d).length<8){d=uuid();store.set("device",d)}return d}
+
+function syncUploadTeam(){
+  const l=document.getElementById("uTeamLbl");
+  l.innerHTML=me?`<b style="color:var(--${me.team})">${TEAM[me.team].emoji} ${TEAM[me.team].name}</b> 사진으로 올라가요 · ${esc(me.name)}`:`팀원 찾기를 먼저 해야 사진을 올릴 수 있어요. <a href="#test">팀원 찾기</a>`;
+  updateBtn();
+}
+function updateBtn(){const b=document.getElementById("uBtn");if(b)b.disabled=!(picked.length&&sb&&me)}
+function fillSelects(){
+  syncUploadTeam();
+  const ms=Object.entries(MISSIONS);
+  const cur=document.getElementById("uMission").value;
+  document.getElementById("uMission").innerHTML=ms.map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
+  if(ms.some(([k])=>k===cur))document.getElementById("uMission").value=cur;
+}
+function renderFilters(){
+  const ft=[["all","전체",""]].concat(KEYS.map(k=>[k,TEAM[k].name,k]));
+  document.getElementById("fTeam").innerHTML=ft.map(([k,n,c])=>`<button class="chip" style="--cc:${c?`var(--${c})`:"var(--accent)"}" data-k="${k}" aria-pressed="${fTeam===k}">${c?"<i></i>":""}${n}</button>`).join("");
+  const fm=[["all","모든 미션"]].concat(Object.entries(MISSIONS));
+  document.getElementById("fMission").innerHTML=fm.map(([k,n])=>`<button class="chip" style="--cc:var(--muted)" data-k="${k}" aria-pressed="${fMission===k}">${n}</button>`).join("");
+  document.querySelectorAll("#fTeam .chip").forEach(b=>b.onclick=()=>{fTeam=b.dataset.k;renderFilters();renderGrid(true)});
+  document.querySelectorAll("#fMission .chip").forEach(b=>b.onclick=()=>{fMission=b.dataset.k;renderFilters();renderGrid(true)});
+}
+const hearts=p=>p.hearts&&typeof p.hearts==="object"?Object.values(p.hearts).filter(v=>v===true).length:0;
+const liked=p=>!!(myId&&p.hearts&&p.hearts[myId]===true);
+let fSort="new", lastKey="", busy=new Set(), lbId=null;
+function renderSorts(){
+  document.getElementById("fSort").innerHTML=`<span>정렬</span>`+[["new","최신순"],["love","❤️ 하트순"]].map(([k,n])=>`<button class="chip" style="--cc:var(--accent)" data-k="${k}" aria-pressed="${fSort===k}">${n}</button>`).join("");
+  document.querySelectorAll("#fSort .chip").forEach(b=>b.onclick=()=>{fSort=b.dataset.k;renderSorts();renderGrid(true)});
+}
+function renderBoard(){return;
+  document.getElementById("board").innerHTML=KEYS.map(k=>{
+    const mine=photos.filter(p=>p.team===k);
+    const by={};mine.forEach(p=>{const n=p.by||"익명";by[n]=(by[n]||0)+1});
+    const rank=Object.entries(by).sort((x,y)=>y[1]-x[1]||x[0].localeCompare(y[0],"ko")).slice(0,3);
+    const love=mine.reduce((a,p)=>a+hearts(p),0);
+    return `<div style="--cc:var(--${k})"><div class="tt"><span>${TEAM[k].emoji} ${TEAM[k].name.replace("팀","")}</span><b>${mine.length}</b></div>
+      <p class="sub">무지개 ${mine.filter(p=>p.mission==="rainbow").length}장 · ❤️ ${love}</p>
+      <ol>${rank.length?rank.map(([n,c],i)=>`<li class="${i===0?"top":""}"><b>${i===0?"👑 ":""}${esc(n)}</b><em>${c}장</em></li>`).join(""):`<li><em>아직 없어요</em></li>`}</ol></div>`}).join("");
+}
+function heartBtn(p){return `<button class="heart" data-h="${esc(p.id)}" aria-pressed="${liked(p)}" aria-label="하트 ${hearts(p)}개" ${myId&&sb?"":"disabled"}><span class="h">❤️</span><span class="n">${hearts(p)}</span></button>`}
+function renderGrid(force){
+  let list=photos.filter(p=>(fTeam==="all"||p.team===fTeam)&&(fMission==="all"||p.mission===fMission));
+  if(fSort==="love")list=[...list].sort((x,y)=>hearts(y)-hearts(x)||(y.at||0)-(x.at||0));
+  const g=document.getElementById("grid");
+  const key=list.map(p=>p.id).join(",")+"|"+fSort;
+  if(!force&&key===lastKey){ // 같은 사진 구성: 하트만 갱신
+    list.forEach(p=>{const b=g.querySelector(`[data-h="${CSS.escape(p.id)}"]`);if(b&&!busy.has(p.id)){b.setAttribute("aria-pressed",liked(p));b.querySelector(".n").textContent=hearts(p);b.setAttribute("aria-label","하트 "+hearts(p)+"개")}});
+    return;
+  }
+  lastKey=key;
+  if(!list.length){g.innerHTML=`<p class="empty">${photos.length?"이 조건의 사진이 아직 없어요.":"아직 올라온 사진이 없어요. 첫 사진의 주인공이 되어주세요! 🍁"}</p>`;return}
+  g.innerHTML=list.map(p=>`<figure class="ph${!firstLoad&&!seen.has(p.id)?" new":""}" style="--cc:var(--${p.team})">
+    <button class="pic" data-id="${esc(p.id)}" aria-label="${esc(TEAM[p.team]?.name||"")} 사진 크게 보기"><img src="${thumbURL(p.blob)}" data-full="${blobURL(p.blob)}" alt="${esc(p.caption||MISSIONS[p.mission]||"")}" loading="lazy" onerror="if(this.dataset.full&&this.src!==this.dataset.full){this.src=this.dataset.full;return}this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-miss',textContent:'사진을 불러올 수 없어요'}))"><span class="tag">${esc(MISSIONS[p.mission]||"")}</span></button>
+    <figcaption class="bar"><span class="who"><b>${esc(p.by||"익명")}</b><span>${p.caption?esc(p.caption):esc(TEAM[p.team]?.name||"")}</span></span>${heartBtn(p)}</figcaption></figure>`).join("");
+  list.forEach(p=>seen.add(p.id));
+  g.querySelectorAll(".pic").forEach(b=>b.onclick=()=>openLB(b.dataset.id));
+  g.querySelectorAll(".heart").forEach(b=>b.onclick=()=>toggleHeart(b.dataset.h,b));
+}
+async function toggleHeart(id,btn){
+  const p=photos.find(x=>x.id===id);if(!p||!myId||!sb||busy.has(id))return;
+  const next=!liked(p);busy.add(id);
+  const paint=(b,on,n)=>{if(!b)return;b.setAttribute("aria-pressed",on);b.querySelector(".n").textContent=n;b.classList.remove("beat");void b.offsetWidth;if(on)b.classList.add("beat")};
+  const n=hearts(p)+(next?1:-1);
+  paint(btn,next,n);if(lbId===id)paint(document.getElementById("lbHeart"),next,n);
+  try{const {data,error}=await sb.rpc("toggle_like",{pid:id,dev:myId});if(error)throw error;
+    const h={...(p.hearts||{})};if(data)h[myId]=true;else delete h[myId];p.hearts=h;}
+  catch(e){paint(btn,!next,hearts(p));if(lbId===id)paint(document.getElementById("lbHeart"),!next,hearts(p))}
+  finally{busy.delete(id)}
+}
+function openLB(id){
+  const p=photos.find(x=>x.id===id);if(!p)return;
+  lbId=id;
+  const lb=document.getElementById("lb");
+  document.getElementById("lbStatus").textContent="";
+  document.getElementById("lbImg").src=blobURL(p.blob);
+  document.getElementById("lbImg").alt=p.caption||"";
+  const t=new Date(p.at||0);
+  document.getElementById("lbCap").textContent=`${TEAM[p.team]?.name||""} · ${MISSIONS[p.mission]||""} · ${p.by||""}${p.caption?" · "+p.caption:""} · ${t.getHours()}:${String(t.getMinutes()).padStart(2,"0")}`;
+  const hb=document.getElementById("lbHeart");
+  hb.setAttribute("aria-pressed",liked(p));hb.querySelector(".n").textContent=hearts(p);hb.disabled=!(myId&&sb);
+  hb.onclick=()=>toggleHeart(id,document.querySelector(`#grid [data-h="${CSS.escape(id)}"]`)||null);
+  const del=document.getElementById("lbDel");
+  del.hidden=!(canAdmin||(myId&&p.uid===myId));
+  del.textContent="삭제";let armed=false;
+  del.onclick=async()=>{
+    if(!armed){armed=true;del.textContent="한 번 더 누르면 삭제";return}
+    del.disabled=true;
+    try{
+      const {data,error}=await sb.rpc("delete_photo",{pid:p.id,dev:myId,pin:adminPin||""});
+      if(error||!data)throw error||new Error("denied");
+      photos=photos.filter(x=>x.id!==p.id);refreshAll();
+      lb.close();
+    }catch(e){document.getElementById("lbStatus").textContent="삭제하지 못했어요. 잠시 후 다시 시도해주세요.";}
+    finally{del.disabled=false;del.textContent="삭제";armed=false}
+  };
+  lb.showModal();
+}
+document.getElementById("lbClose").onclick=()=>document.getElementById("lb").close();
+document.getElementById("lb").addEventListener("close",()=>{lbId=null});
+document.getElementById("lb").addEventListener("click",e=>{if(e.target.id==="lb")e.target.close()});
+
+/* ---------- 낙엽 보드 ---------- */
+const hash=str=>{let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967295};
+const placed=new Set();
+function renderLeafBoard(full){
+  const boardOn=document.getElementById("v-archive").classList.contains("on");
+  const people=new Set(photos.map(p=>p.by||"익명"));
+  const love=photos.reduce((a,p)=>a+hearts(p),0);
+  document.getElementById("stats").innerHTML=`<div><b>${photos.length}</b><span>떨어진 낙엽 (사진)</span></div><div><b>${love}</b><span>❤️ 하트</span></div><div><b>${people.size}</b><span>참여한 사람</span></div>`;
+  const piles=document.getElementById("piles");
+  if(!piles.children.length||full){
+    piles.innerHTML=KEYS.map(k=>`<div class="pile" style="--cc:var(--${k})"><div class="hd"><b data-c="${k}">0</b><span>${TEAM[k].emoji} ${TEAM[k].name.replace("팀","")}</span></div><div class="heap" data-heap="${k}"></div><div class="ft" data-ft="${k}"></div></div>`).join("");
+    placed.clear();
+  }
+  KEYS.forEach(k=>{
+    const mine=photos.filter(p=>p.team===k).sort((x,y)=>(x.at||0)-(y.at||0));
+    piles.querySelector(`[data-c="${k}"]`).textContent=mine.length;
+    const by={};mine.forEach(p=>{const n=p.by||"익명";by[n]=(by[n]||0)+1});
+    const rank=Object.entries(by).sort((x,y)=>y[1]-x[1]||x[0].localeCompare(y[0],"ko")).slice(0,3);
+    piles.querySelector(`[data-ft="${k}"]`).innerHTML=rank.length?rank.map(([nm,c],i)=>`<div>${i===0?"👑 ":""}<b>${esc(nm)}</b> <em>${c}장</em></div>`).join(""):`<em>첫 낙엽을 기다려요</em>`;
+    const heap=piles.querySelector(`[data-heap="${k}"]`);
+    const H=heap.clientHeight||300;
+    const n=mine.length, sz=Math.max(16,Math.min(34,Math.round(Math.sqrt((90*H)/Math.max(n,1))*1.15)));
+    const perRow=Math.max(3,Math.floor(100/(sz*0.42)));
+    const ids=new Set(mine.map(p=>p.id));
+    heap.querySelectorAll(".leaf").forEach(el=>{if(!ids.has(el.dataset.id)){el.remove();placed.delete(el.dataset.id)}});
+    mine.forEach((p,i)=>{
+      const row=Math.floor(i/perRow), r1=hash(p.id), r2=hash(p.id+"y"), r3=hash(p.id+"r");
+      const x=Math.min(92,Math.max(0,((i%perRow)+r1*0.9)/perRow*100-4));
+      const y=row*sz*0.42+r2*sz*0.3;
+      let el=heap.querySelector(`[data-id="${CSS.escape(p.id)}"]`);
+      if(!el){
+        el=document.createElement("button");
+        el.className="leaf";el.dataset.id=p.id;el.type="button";
+        el.style.cssText="padding:0;border:0;background:none;cursor:pointer";
+        el.setAttribute("aria-label",`${p.by||""} 사진 보기`);
+        el.innerHTML=`<svg><use href="#lf-${k}"/></svg>`;
+        el.onclick=()=>openLB(p.id);
+        if(boardOn&&!firstLoad&&!placed.has(p.id)&&!full)el.classList.add("fall");
+        heap.appendChild(el);placed.add(p.id);
+      }
+      el.style.setProperty("--sz",sz+"px");el.style.setProperty("--r",Math.round(r3*300-150)+"deg");
+      const by2=Math.min(H-sz,y);el.style.left=x+"%";el.style.bottom=by2+"px";el.style.setProperty("--drop",-(H-by2+sz)+"px");
+      el.classList.toggle("hot",hearts(p)>=3);
+    });
+  });
+  const tops=[...photos].filter(p=>hearts(p)>0).sort((x,y)=>hearts(y)-hearts(x)||(y.at||0)-(x.at||0)).slice(0,3);
+  document.getElementById("tops").innerHTML=tops.length?tops.map((p,i)=>`<button style="--cc:var(--${p.team})" data-id="${esc(p.id)}" aria-label="${i+1}위 사진"><img src="${thumbURL(p.blob)}" onerror="this.onerror=null;this.src='${blobURL(p.blob)}'" alt="" loading="lazy"><span class="rk">${["🥇","🥈","🥉"][i]} ${esc(p.by||"")}</span><span class="lv">❤️ ${hearts(p)}</span></button>`).join(""):`<p class="empty" style="grid-column:1/-1">가을 도감에서 마음에 드는 사진에 하트를 눌러주세요.</p>`;
+  document.querySelectorAll("#tops button").forEach(b=>b.onclick=()=>openLB(b.dataset.id));
+}
+
+/* 업로드 */
+const uFile=document.getElementById("uFile"),uBtn=document.getElementById("uBtn"),uStatus=document.getElementById("uStatus");
+uFile.onchange=()=>{
+  picked=[...uFile.files].slice(0,10);
+  document.getElementById("drop").classList.toggle("has",picked.length>0);
+  document.getElementById("dropTxt").textContent=picked.length?`${picked.length}장 선택됨 (다시 눌러서 바꾸기)`:"눌러서 사진 고르기 (한 번에 10장까지)";
+  document.getElementById("thumbs").innerHTML="";
+  picked.forEach(f=>{const i=document.createElement("img");i.alt="";i.src=URL.createObjectURL(f);document.getElementById("thumbs").appendChild(i)});
+  updateBtn();
+};
+async function shrink(file,max=1400,q=.82){
+  try{
+    const bmp=await createImageBitmap(file,{imageOrientation:"from-image"});
+    const s=Math.min(1,max/Math.max(bmp.width,bmp.height));
+    const c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
+    c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+    return await new Promise(r=>c.toBlob(b=>r(b),"image/jpeg",q))||file;
+  }catch(e){return file}
+}
+uBtn.onclick=async()=>{
+  if(!picked.length||!sb||!me)return;
+  const team=me.team, mission=document.getElementById("uMission").value;
+  const caption=document.getElementById("uCap").value.trim().slice(0,60);
+  const by=me.name;
+  uBtn.disabled=true;uStatus.className="status";let ok=0;
+  for(let i=0;i<picked.length;i++){
+    uStatus.textContent=`올리는 중… ${i+1} / ${picked.length}`;
+    try{
+      const blob=await shrink(picked[i]);
+      const ext=blob.type==="image/png"?"png":blob.type==="image/webp"?"webp":"jpg";
+      const key=`${team}/${uuid()}`, path=`${key}.${ext}`;
+      const up=await sb.storage.from("photos").upload(path,blob,{contentType:blob.type||"image/jpeg",cacheControl:"31536000",upsert:false});
+      if(up.error)throw up.error;
+      // 목록용 작은 사진 (데이터 사용량 절약). 실패해도 원본으로 보여요
+      try{const t=await shrink(picked[i],480,.72);if(t&&t.type==="image/jpeg")await sb.storage.from("photos").upload(`${key}_t.jpg`,t,{contentType:"image/jpeg",cacheControl:"31536000",upsert:false})}catch(e){}
+      const ins=await sb.from("photos").insert({team,mission,path,caption,by_name:by,device:myId}).select().single();
+      if(ins.error)throw ins.error;
+      addRow(ins.data);
+      ok++;
+    }catch(e){
+      uStatus.className="status err";
+      const m=String(e&&(e.message||e.error)||"");
+      uStatus.textContent=/mime|type/i.test(m)?"이 형식의 파일은 올릴 수 없어요. JPG나 PNG로 다시 골라주세요.":/size|large/i.test(m)?"사진이 너무 커요. 다른 사진으로 다시 골라주세요.":"업로드에 실패했어요. 잠시 후 다시 시도해주세요.";
+    }
+  }
+  if(ok){uStatus.className="status";uStatus.textContent=`${ok}장 올렸어요! 🍁`;fTeam="all";fMission="all";fSort="new";renderFilters();renderSorts();renderGrid(true);document.getElementById("fTeam").scrollIntoView({behavior:"smooth",block:"start"});}
+  picked=[];uFile.value="";document.getElementById("thumbs").innerHTML="";document.getElementById("drop").classList.remove("has");
+  document.getElementById("dropTxt").textContent="눌러서 사진 고르기 (한 번에 10장까지)";
+  document.getElementById("uCap").value="";updateBtn();
+};
+
+
+
+/* ---------- Supabase 연결 ---------- */
+const likeSet=new Map(); // photoId -> Set(device)
+function rowToPhoto(r){return {id:r.id,team:r.team,mission:r.mission,blob:r.path,caption:r.caption||"",by:r.by_name,uid:r.device,at:Date.parse(r.created_at)||Date.now(),hearts:Object.fromEntries([...(likeSet.get(r.id)||[])].map(d=>[d,true]))}}
+function sortPhotos(){photos.sort((x,y)=>(y.at||0)-(x.at||0))}
+function syncHearts(id){const p=photos.find(x=>x.id===id);if(p&&!busy.has(id))p.hearts=Object.fromEntries([...(likeSet.get(id)||[])].map(d=>[d,true]))}
+let raf=0;
+function refreshAll(){cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{
+  renderGrid();renderLeafBoard(false);firstLoad=false;
+  if(lbId){const p=photos.find(x=>x.id===lbId);const hb=document.getElementById("lbHeart");if(!p)document.getElementById("lb").close();else if(!busy.has(lbId)){hb.setAttribute("aria-pressed",liked(p));hb.querySelector(".n").textContent=hearts(p)}}
+})}
+function addRow(r){if(!r||!TEAM[r.team]||photos.some(p=>p.id===r.id))return;photos.push(rowToPhoto(r));sortPhotos();refreshAll()}
+async function loadAll(){
+  const [ph,lk]=await Promise.all([
+    sb.from("photos").select("*").order("created_at",{ascending:false}).limit(2000),
+    sb.from("likes").select("photo_id,device").limit(20000)
+  ]);
+  if(ph.error)throw ph.error;
+  likeSet.clear();(lk.data||[]).forEach(l=>{if(!likeSet.has(l.photo_id))likeSet.set(l.photo_id,new Set());likeSet.get(l.photo_id).add(l.device)});
+  photos=ph.data.filter(r=>TEAM[r.team]).map(rowToPhoto);sortPhotos();refreshAll();
+}
+async function boot(){
+  myId=deviceId();
+  fillSelects();renderFilters();renderSorts();renderLeafBoard(false);
+  const gS=document.getElementById("gStatus");
+  if(!window.supabase||SUPABASE_URL.includes("YOUR-PROJECT")){gS.textContent="사진 저장소가 아직 연결되지 않았어요. (진행자: index.html 맨 위 SUPABASE 설정을 채워주세요)";updateBtn();return}
+  sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:false}});
+  updateBtn();
+  const timer=setTimeout(()=>{gS.textContent="연결이 느려요. 사진이 늦게 보일 수 있어요."},10000);
+  try{await loadAll();clearTimeout(timer);gS.textContent=""}
+  catch(e){clearTimeout(timer);gS.textContent="사진을 불러오지 못했어요. 잠시 후 새로고침해주세요."}
+  sb.channel("gogiri-live")
+    .on("postgres_changes",{event:"INSERT",schema:"public",table:"photos"},p=>addRow(p.new))
+    .on("postgres_changes",{event:"DELETE",schema:"public",table:"photos"},p=>{const id=p.old&&p.old.id;if(id){photos=photos.filter(x=>x.id!==id);likeSet.delete(id);refreshAll()}})
+    .on("postgres_changes",{event:"INSERT",schema:"public",table:"likes"},p=>{const l=p.new;if(!likeSet.has(l.photo_id))likeSet.set(l.photo_id,new Set());likeSet.get(l.photo_id).add(l.device);syncHearts(l.photo_id);refreshAll()})
+    .on("postgres_changes",{event:"DELETE",schema:"public",table:"likes"},p=>{const l=p.old||{};if(l.photo_id&&likeSet.has(l.photo_id)){likeSet.get(l.photo_id).delete(l.device);syncHearts(l.photo_id);refreshAll()}})
+    .subscribe(st=>{const live=document.getElementById("liveTag");live.hidden=st!=="SUBSCRIBED"});
+  // 탭을 다시 열었을 때 빠진 변화 보충
+  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&sb)loadAll().catch(()=>{})});
+}
+
+/* 진행자 모드: 제목을 5번 연속 누르면 PIN 입력 */
+let taps=0,tapT=0;
+document.querySelector(".brand h1").addEventListener("click",()=>{
+  clearTimeout(tapT);taps++;tapT=setTimeout(()=>taps=0,1500);
+  if(taps>=5){taps=0;document.getElementById("pinDlg").showModal()}
+});
+document.getElementById("pinOk").onclick=async()=>{
+  const pin=document.getElementById("pinIn").value.trim();const st=document.getElementById("pinSt");
+  if(!sb){st.textContent="저장소가 연결되지 않았어요.";return}
+  const {data}=await sb.rpc("check_admin",{pin});
+  if(data){adminPin=pin;canAdmin=true;st.textContent="진행자 모드가 켜졌어요. 모든 사진을 지울 수 있어요.";setTimeout(()=>document.getElementById("pinDlg").close(),900)}
+  else st.textContent="PIN이 맞지 않아요.";
+};
+document.getElementById("pinX").onclick=()=>document.getElementById("pinDlg").close();
+
+route();
+boot();
+</script>
+</body>
+</html>
