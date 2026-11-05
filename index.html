@@ -165,7 +165,10 @@ section.view.on{display:block}
 .filters .chip{flex:none}
 .upl{display:grid;gap:10px}
 .upl .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.drop{border:2px dashed var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;background:var(--bg)}
+.drop{border:2px dashed var(--line);border-radius:14px;padding:14px;text-align:center;background:var(--bg)}
+.pickrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pick{display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:12px;border:1.5px solid var(--accent);color:var(--accent);background:var(--paper);font-weight:600;cursor:pointer;text-align:center;padding:8px}
+.pick:active{transform:scale(.98)}
 .drop.has{border-color:var(--accent)}
 .thumbs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px}
 .thumbs img{width:58px;height:58px;object-fit:cover;border-radius:8px}
@@ -242,11 +245,17 @@ dialog .cap p{flex:1;font-size:14.5px}
       <div class="upl">
         <p id="uTeamLbl" class="hint"></p>
         <label>미션<select class="field" id="uMission"></select></label>
-        <label class="drop" id="drop">
-          <input type="file" id="uFile" accept="image/*" multiple hidden>
-          <span id="dropTxt">눌러서 사진 고르기 (한 번에 10장까지)</span>
+        <div class="pickrow">
+          <label class="pick" for="uFile">🖼️ 앨범 선택</label>
+          <label class="pick" for="uCam">📷 바로 찍기</label>
+        </div>
+        <input type="file" id="uFile" accept="image/*" multiple hidden>
+        <input type="file" id="uCam" accept="image/*" capture="environment" hidden>
+        <p class="hint" id="andHint" hidden>안드로이드에서 구글 드라이브가 열리면 왼쪽 위 ☰ 메뉴에서 <b>갤러리</b> 또는 <b>사진</b>을 눌러주세요. 잘 안 되면 <b>📷 바로 찍기</b>를 써보세요.</p>
+        <div class="drop" id="drop">
+          <span id="dropTxt">위 버튼으로 사진을 골라주세요 (한 번에 10장까지)</span>
           <div class="thumbs" id="thumbs"></div>
-        </label>
+        </div>
         <input class="field" id="uCap" maxlength="60" placeholder="한 줄 설명 (예: 은행잎 발견!)">
         <button class="btn" id="uBtn" disabled>올리기</button>
         <p class="status" id="uStatus"></p>
@@ -596,14 +605,18 @@ function renderLeafBoard(full){
 
 /* 업로드 */
 const uFile=document.getElementById("uFile"),uBtn=document.getElementById("uBtn"),uStatus=document.getElementById("uStatus");
-uFile.onchange=()=>{
-  picked=[...uFile.files].slice(0,10);
+const uCam=document.getElementById("uCam");
+if(/Android/i.test(navigator.userAgent))document.getElementById("andHint").hidden=false;
+uCam.onchange=()=>onPick(uCam.files);
+uFile.onchange=()=>onPick(uFile.files);
+function onPick(files){
+  picked=[...files].slice(0,10);
   document.getElementById("drop").classList.toggle("has",picked.length>0);
-  document.getElementById("dropTxt").textContent=picked.length?`${picked.length}장 선택됨 (다시 눌러서 바꾸기)`:"눌러서 사진 고르기 (한 번에 10장까지)";
+  document.getElementById("dropTxt").textContent=picked.length?`${picked.length}장 선택됨 (버튼을 다시 누르면 바꿀 수 있어요)`:"위 버튼으로 사진을 골라주세요 (한 번에 10장까지)";
   document.getElementById("thumbs").innerHTML="";
   picked.forEach(f=>{const i=document.createElement("img");i.alt="";i.src=URL.createObjectURL(f);document.getElementById("thumbs").appendChild(i)});
   updateBtn();
-};
+}
 async function shrink(file,max=1400,q=.82){
   try{
     const bmp=await createImageBitmap(file,{imageOrientation:"from-image"});
@@ -640,8 +653,8 @@ uBtn.onclick=async()=>{
     }
   }
   if(ok){uStatus.className="status";uStatus.textContent=`${ok}장 올렸어요! 🍁`;fTeam="all";fMission="all";fSort="new";renderFilters();renderSorts();renderGrid(true);document.getElementById("fTeam").scrollIntoView({behavior:"smooth",block:"start"});}
-  picked=[];uFile.value="";document.getElementById("thumbs").innerHTML="";document.getElementById("drop").classList.remove("has");
-  document.getElementById("dropTxt").textContent="눌러서 사진 고르기 (한 번에 10장까지)";
+  picked=[];uFile.value="";uCam.value="";document.getElementById("thumbs").innerHTML="";document.getElementById("drop").classList.remove("has");
+  document.getElementById("dropTxt").textContent="위 버튼으로 사진을 골라주세요 (한 번에 10장까지)";
   document.getElementById("uCap").value="";updateBtn();
 };
 
